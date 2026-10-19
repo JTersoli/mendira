@@ -205,12 +205,6 @@
     animation: popin 400ms 900ms both;
   }
   @keyframes popin { from { opacity: 0; transform: translateY(8px) scale(0.9); } to { opacity: 1; transform: none; } }
-  .words { display: flex; flex-wrap: wrap; gap: 6px 8px; justify-content: center; margin-top: 4px; }
-  .words span {
-    font-family: var(--display); font-size: 0.85rem;
-    background: rgba(46,125,79,0.12); color: var(--basque);
-    border: 1px solid rgba(46,125,79,0.35); border-radius: 4px; padding: 2px 8px;
-  }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -405,9 +399,6 @@
       card.appendChild(el('div', 'eu', 'Mendietako zaldi <span class="rainbow">homosexuala</span>'));
       card.appendChild(el('div', 'es', 'El pilotaduna homosexual de las montañas.'));
       card.appendChild(el('p', 'obvio', 'Las ovejas lo sabían.'));
-      const words = el('div', 'words');
-      ['harria', 'eguzkilorea', 'ardia', 'haritza', 'hodeia', 'mendia', 'ispilua', 'zaldia'].forEach(w => words.appendChild(el('span', null, w)));
-      card.appendChild(words);
       card.appendChild(button('Subir otra vez (ya sabés qué hay)', () => { step = 0; render(); }));
       scene.appendChild(card);
       setTimeout(() => relincho(false), 500);
