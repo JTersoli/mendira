@@ -4,15 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Una lección de euskera en altura. Subí al monte, aprendé ocho palabras y mirate bien en el espejo.">
-<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Mendira!</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Nunito:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
-  /* Layout: una sola pantalla. El fondo es una escena pixel art que cambia con la etapa;
+  /* Una sola pantalla. El fondo es una escena pixel art que cambia con la etapa;
      el caminante sube por el sendero de la montaña y las tarjetas son cuadros de diálogo
-     tipo RPG apoyados abajo. Mirada única de excursión diurna: un solo tema, a propósito. */
+     tipo RPG apoyados abajo. */
   :root {
     --bg: #a9d4ef;
     --fg: #2a2520;
@@ -22,11 +20,12 @@
     --accent: #c8402f;      /* rojo de ikurriña, apagado */
     --accent-ink: #fff6f2;
     --basque: #2e7d4f;      /* verde de ikurriña */
-    --gold: #e0b24a;
     --display: "Pixelify Sans", "Trebuchet MS", "Segoe UI", sans-serif;
     --body: "Nunito", "Segoe UI", system-ui, sans-serif;
     --fade: 900ms;
     color-scheme: light;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   html, body { height: 100%; }
@@ -40,6 +39,7 @@
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
   }
+  img { max-width: 100%; }
 
   /* Dos capas de fondo para fundir entre escenas */
   .bg {
@@ -199,7 +199,7 @@
     background: linear-gradient(90deg, #e03b3b, #f29a2e, #d9b422, #3aa65c, #3a6fe0, #8a4bd6);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .obvio {
+  .remate {
     font-family: var(--display); font-weight: 700; font-size: 1.6rem;
     color: var(--accent); margin: 2px 0 0;
     animation: popin 400ms 900ms both;
@@ -210,6 +210,8 @@
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   }
 </style>
+</head>
+<body>
 
 <div class="bg" id="bgA"></div>
 <div class="bg" id="bgB"></div>
@@ -272,7 +274,7 @@
   }
   window.addEventListener('resize', placeHiker);
 
-  // ---- relincho sintetizado (no se pueden cargar audios externos) ----
+  // ---- relincho sintetizado con Web Audio ----
   let ctx = null;
   function relincho(lejos) {
     try {
@@ -398,7 +400,7 @@
       const card = el('div', 'card solo finale');
       card.appendChild(el('div', 'eu', 'Mendietako zaldi <span class="rainbow">homosexuala</span>'));
       card.appendChild(el('div', 'es', 'El pilotaduna homosexual de las montañas.'));
-      card.appendChild(el('p', 'obvio', 'Las ovejas lo sabían.'));
+      card.appendChild(el('p', 'remate', 'Las ovejas lo sabían.'));
       card.appendChild(button('Subir otra vez (ya sabés qué hay)', () => { step = 0; render(); }));
       scene.appendChild(card);
       setTimeout(() => relincho(false), 500);
@@ -418,20 +420,11 @@
   });
 
   // Precargar todas las imágenes para que los cambios sean instantáneos
-  const all = Object.values(IMG).concat(objetos.map(o => o.pic), ['assets/mendizalea.png']);
-  all.forEach(src => { const i = new Image(); i.src = src; });
+  Object.values(IMG).concat(objetos.map(o => o.pic)).forEach(src => { const i = new Image(); i.src = src; });
 
-  function start(data) {
-    if (data && Number.isInteger(data.step) && data.step >= 0 && data.step < TOTAL) step = data.step;
-    render();
-    requestAnimationFrame(placeHiker);
-  }
-  if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ step }));
-  if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(start);
-  else start((window.claude && window.claude.hot && window.claude.hot.data) || {});
+  render();
+  requestAnimationFrame(placeHiker);
 })();
 </script>
-
-</head>
-<body></body>
+</body>
 </html>
