@@ -145,6 +145,7 @@
     box-shadow: 0 4px 0 var(--card-edge);
     transition: transform 100ms ease, box-shadow 100ms ease;
   }
+  a.btn { text-decoration: none; display: inline-block; }
   .btn:hover { transform: translateY(-1px); }
   .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--card-edge); }
   .btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
@@ -401,6 +402,8 @@
       card.appendChild(el('div', 'es', 'El pilotaduna homosexual de las montañas.'));
       card.appendChild(el('p', 'remate', 'Las ovejas lo sabían.'));
       card.appendChild(button('Subir otra vez (ya sabés qué hay)', () => { step = 0; render(); }));
+      const l2 = el('a', 'btn', 'Lección 2: Taloa!'); l2.href = 'taloa.html';
+      card.appendChild(l2);
       scene.appendChild(card);
       setTimeout(() => relincho(false), 500);
     }
