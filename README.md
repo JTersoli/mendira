@@ -1,7 +1,8 @@
 # Mendira!
 
-Lecciones de euskera en pixel art, sin dependencias. Abrí `index.html` (lección 1, el monte) o `taloa.html` (lección 2, el talo).
+Una lección de euskera en altura. Juego de una sola pantalla, sin dependencias: abrí `index.html`.
 
-- `index.html`: lección 1, Mendira! (HTML, CSS y JS en un solo archivo).
-- `taloa.html`: lección 2, Taloa! Armás un talo en la feria y al final decidís lo de la mayonesa.
+- `index.html`: el juego completo (HTML, CSS y JS).
 - `assets/`: imágenes pixel art.
+
+La lección 2 es [Taloa!](https://jtersoli.github.io/taloa/).
